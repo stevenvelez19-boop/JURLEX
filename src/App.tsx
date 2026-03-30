@@ -353,13 +353,13 @@ export default function App() {
               {searchQuery && (
                 <button 
                   onClick={handleAISearch}
-                  disabled={isSearchingAI}
-                  className="absolute inset-y-0 right-4 flex items-center text-gold"
+                  disabled={isSearchingAI || !isOnline}
+                  className="absolute inset-y-0 right-4 flex items-center text-gold disabled:opacity-50"
                 >
                   {isSearchingAI ? (
                     <div className="w-5 h-5 border-2 border-gold border-t-transparent rounded-full animate-spin" />
                   ) : (
-                    <Sparkles className="w-5 h-5" />
+                    <Sparkles className={`w-5 h-5 ${!isOnline ? 'text-slate/30' : ''}`} />
                   )}
                 </button>
               )}
@@ -975,10 +975,10 @@ export default function App() {
                             const title = (document.getElementById('add-term-form') as HTMLFormElement).elements.namedItem('title') as HTMLInputElement;
                             handleAutoFillResource(title.value);
                           }}
-                          disabled={isGeneratingAI}
+                          disabled={isGeneratingAI || !isOnline}
                           className="text-[10px] font-bold text-legal-gold flex items-center gap-1 disabled:opacity-50 font-sans"
                         >
-                          {isGeneratingAI ? 'Generando...' : <><Sparkles className="w-3 h-3" /> IA Auto-fill</>}
+                          {isGeneratingAI ? 'Generando...' : <><Sparkles className="w-3 h-3" /> {isOnline ? 'IA Auto-fill' : 'Offline'}</>}
                         </button>
                       </div>
                       <input name="title" required className="w-full p-3 bg-white border border-legal-gold/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-legal-gold/20 font-sans" />
@@ -1013,10 +1013,10 @@ export default function App() {
                             const term = (document.getElementById('add-term-form') as HTMLFormElement).elements.namedItem('term') as HTMLInputElement;
                             handleAutoFillTerminology(term.value);
                           }}
-                          disabled={isGeneratingAI}
+                          disabled={isGeneratingAI || !isOnline}
                           className="text-[10px] font-bold text-legal-gold flex items-center gap-1 disabled:opacity-50 font-sans"
                         >
-                          {isGeneratingAI ? 'Generando...' : <><Sparkles className="w-3 h-3" /> IA Auto-fill</>}
+                          {isGeneratingAI ? 'Generando...' : <><Sparkles className="w-3 h-3" /> {isOnline ? 'IA Auto-fill' : 'Offline'}</>}
                         </button>
                       </div>
                       <input name="term" required className="w-full p-3 bg-white border border-legal-gold/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-legal-gold/20 font-sans" />
@@ -1042,10 +1042,10 @@ export default function App() {
                             const name = (document.getElementById('add-term-form') as HTMLFormElement).elements.namedItem('name') as HTMLInputElement;
                             handleAutoFillOrganization(name.value);
                           }}
-                          disabled={isGeneratingAI}
+                          disabled={isGeneratingAI || !isOnline}
                           className="text-[10px] font-bold text-legal-gold flex items-center gap-1 disabled:opacity-50 font-sans"
                         >
-                          {isGeneratingAI ? 'Generando...' : <><Sparkles className="w-3 h-3" /> IA Auto-fill</>}
+                          {isGeneratingAI ? 'Generando...' : <><Sparkles className="w-3 h-3" /> {isOnline ? 'IA Auto-fill' : 'Offline'}</>}
                         </button>
                       </div>
                       <input name="name" required className="w-full p-3 bg-white border border-legal-gold/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-legal-gold/20 font-sans" />
